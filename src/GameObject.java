@@ -4,7 +4,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameObject implements KeyListener {
-	boolean isJumping = false;
+	boolean isJumping;
+	boolean isFalling;
 	private int x,y,w,h;
 	public static void main (String[] args)
 	{
@@ -22,23 +23,68 @@ public class GameObject implements KeyListener {
 		g.fillRect(x, y, w, h);
 		
 	}
-	public void update()
+	public void Cactusupdate()
+	{
+		x-=3;
+
+	}
+	public boolean isJumping() {
+		return isJumping;
+	}
+	public void setJumping(boolean isJumping) {
+		this.isJumping = isJumping;
+	}
+
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	public int getW() {
+		return w;
+	}
+	public void setW(int w) {
+		this.w = w;
+	}
+	public int getH() {
+		return h;
+	}
+	public void setH(int h) {
+		this.h = h;
+	}
+	public void Dinoupdate()
 	{
 		
-		x--;
 		if(isJumping)
 		{
-			if(y<300)
+			if(isFalling)
 			{
-			 y--;
+				y = y+10;
+			}
+			else{
+				
+			if(y>150)
+			{
+				 y = y-10;
 			}
 			else
 			{
-				y++;
+				isFalling = true;
+					 y = y+1;
 			}
-			if(y<=20)
+
+			}
+			if(y>=390)
 			{
 				isJumping = false;
+				isFalling = false;
 			}
 		}
 	}
@@ -60,6 +106,15 @@ public class GameObject implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	public boolean getisJumping()
+	{
+		return isJumping;
+	}
+	public void setisJumping(boolean jump)
+	{
+		System.out.println(isJumping);
+		isJumping = jump;
 	}
 	
 
