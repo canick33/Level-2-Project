@@ -27,7 +27,7 @@ public Window()
 	frame = new JFrame();
 	frame.setVisible(true);
 	frame.add(a);
-	frame.addKeyListener(this);
+	frame.addKeyListener(this); 
 	frame.setSize(1500, 500);
 	
 }
