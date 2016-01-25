@@ -6,16 +6,19 @@ import java.awt.event.KeyListener;
 public class GameObject implements KeyListener {
 	boolean isJumping;
 	boolean isFalling;
+	int count;
+	int speed;
 	private int x,y,w,h;
 	public static void main (String[] args)
 	{
 	}
-	public GameObject(int X,int Y,int W,int H)
+	public GameObject(int X,int Y,int W,int H,int Speed)
 	{
 		x=X;
 		y = Y;
 		w = W;
 		h = H;
+		speed =Speed;
 	}
 	public void paint(Graphics g)
 	{
@@ -23,9 +26,9 @@ public class GameObject implements KeyListener {
 		g.fillRect(x, y, w, h);
 		
 	}
-	public void Cactusupdate()
+	public void Cactusupdate(int s)
 	{
-		x-=3;
+		x-=s;
 
 	}
 	public boolean isJumping() {
