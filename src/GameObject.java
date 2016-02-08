@@ -3,6 +3,8 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.imageio.ImageIO;
+
 public class GameObject implements KeyListener {
 	boolean isJumping;
 	boolean isFalling;
@@ -116,7 +118,6 @@ public class GameObject implements KeyListener {
 	}
 	public void setisJumping(boolean jump)
 	{
-		System.out.println(isJumping);
 		isJumping = jump;
 	}
 	

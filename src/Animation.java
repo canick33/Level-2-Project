@@ -3,10 +3,12 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.Timer;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class Animation extends JPanel implements ActionListener {
@@ -16,11 +18,20 @@ public class Animation extends JPanel implements ActionListener {
 	int s = 4;
 	int count = 0;
 	int speedCount = 0;
+	BufferedImage background;
+	BufferedImage background1;
 
 	ArrayList<GameObject> cactusList;
 	Timer t;
 
 	public Animation() {
+		try{
+		background = ImageIO.read(this.getClass().getResourceAsStream("imgres.png"));
+		background1 = ImageIO.read(this.getClass().getResourceAsStream("imgres.png"));
+		}catch(Exception e)
+		{
+			
+		}
 		cactusList = new ArrayList<GameObject>();
 		x = 1000;
 		y = 390;
@@ -39,8 +50,18 @@ public class Animation extends JPanel implements ActionListener {
 			dinosaur.setisJumping(true);
 		}
 	}
-
+int v = 0;
+int p =1999;
 	public void paint(Graphics g) {
+		g.drawImage(background, v=v-(s-2), 0,2000,500,null);
+		g.drawImage(background1,p= p-(s-2),0,2000,500,null);
+		if(v<= -1999){
+			v=1999;
+		}
+		if(p<= -1999)
+		{
+			p=1999;
+		}
 		dinosaur.paint(g);
 		for (int i = 0; i < cactusList.size(); i++) {
 			GameObject go = cactusList.get(i);
@@ -61,7 +82,7 @@ public class Animation extends JPanel implements ActionListener {
 		for (GameObject go : cactusList) {
 
 			if (go.getX() > 100 && go.getX() < 150) {
-				if (dinosaur.getY() > 350) {
+				if (dinosaur.getY() > 290) {
 					System.out.println("Game OVER");
 					System.exit(0);
 					;
@@ -69,7 +90,7 @@ public class Animation extends JPanel implements ActionListener {
 			}
 		}
 		Random r = new Random();
-		x = r.nextInt(200);
+		x = r.nextInt(250)*2;
 		if (count >= 100+x) {
 			count = 0;
 			addCactus();
