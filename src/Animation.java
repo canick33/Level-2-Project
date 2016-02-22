@@ -14,30 +14,36 @@ import javax.swing.JPanel;
 public class Animation extends JPanel implements ActionListener {
 	private int x, y, w, h;
 	GameObject dinosaur;
-	GameObject cactus;
+	BufferedImage cactusImage;
 	int s = 4;
 	int count = 0;
 	int speedCount = 0;
+	String color;
 	BufferedImage background;
 	BufferedImage background1;
+	BufferedImage dino;
+	BufferedImage cactus;
 
 	ArrayList<GameObject> cactusList;
 	Timer t;
 
 	public Animation() {
-		try{
-		background = ImageIO.read(this.getClass().getResourceAsStream("imgres.png"));
-		background1 = ImageIO.read(this.getClass().getResourceAsStream("imgres.png"));
-		}catch(Exception e)
-		{
-			
+		try {
+			background = ImageIO.read(this.getClass().getResourceAsStream("mirrorimage.png"));
+			background1 = ImageIO.read(this.getClass().getResourceAsStream("mirrorimage.png"));
+			dino = ImageIO.read(this.getClass().getResourceAsStream("dino.png"));
+			cactusImage = ImageIO.read(this.getClass().getResourceAsStream("cactus.png"));
+		
+		} catch (Exception e) {
+
 		}
 		cactusList = new ArrayList<GameObject>();
 		x = 1000;
 		y = 390;
 		w = 25;
 		h = 100;
-		dinosaur = new GameObject(100, 390, 50, 100, 0);
+		color = "green";
+		dinosaur = new GameObject(100, 390, 50, 100, 0, dino);
 
 		t = new Timer(1000 / 60, this);
 		t.start();
@@ -50,17 +56,18 @@ public class Animation extends JPanel implements ActionListener {
 			dinosaur.setisJumping(true);
 		}
 	}
-int v = 0;
-int p =1999;
+
+	int v = 0;
+	int p = 1999;
+
 	public void paint(Graphics g) {
-		g.drawImage(background, v=v-(s-2), 0,2000,500,null);
-		g.drawImage(background1,p= p-(s-2),0,2000,500,null);
-		if(v<= -1999){
-			v=1999;
+		g.drawImage(background, v = v - (s - 2), 0, 2000, 500, null);
+		g.drawImage(background1, p = p - (s - 2), 0, 2000, 500, null);
+		if (v <= -2000) {
+			v = 2000;
 		}
-		if(p<= -1999)
-		{
-			p=1999;
+		if (p <= -2000) {
+			p = 2000;
 		}
 		dinosaur.paint(g);
 		for (int i = 0; i < cactusList.size(); i++) {
@@ -90,21 +97,21 @@ int p =1999;
 			}
 		}
 		Random r = new Random();
-		x = r.nextInt(250)*2;
-		if (count >= 100+x) {
+		x = r.nextInt(250) * 2;
+		if (count >= 100 + x) {
 			count = 0;
 			addCactus();
 
 		}
-		if (speedCount ==250) {
-			s=s+1;
-			speedCount =0;
+		if (speedCount == 250) {
+			s = s + 1;
+			speedCount = 0;
 		}
 		repaint();
 	}
 
 	private void addCactus() {
-		cactusList.add(new GameObject(2000, 390, 25, 100, s));
+		 cactusList.add(new GameObject(2000, 390, 25, 100, s,cactusImage ));
 
 		{
 
