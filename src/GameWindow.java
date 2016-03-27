@@ -6,6 +6,7 @@ public class GameWindow {
 	public static void main(String[] args)
 	{
 		GameWindow gw = new GameWindow();
+
 	}
 	public GameWindow()
 	{
