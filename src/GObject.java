@@ -15,7 +15,7 @@ public class GObject {
 	}
 	public void update()
 	{
-		x = x+5;
+		x = x+3;
 	}
 	public void draw(Graphics g)
 	{
@@ -23,5 +23,13 @@ public class GObject {
 		g.fillRect(x, y, w, h);
  
 
+	}
+	public int getX()
+	{
+		return x;
+	}
+	public int getY()
+	{
+		return y;
 	}
 }

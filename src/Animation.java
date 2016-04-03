@@ -42,7 +42,6 @@ public class Animation extends JPanel implements ActionListener {
 		y = 390;
 		w = 25;
 		h = 100;
-		color = "green";
 		dinosaur = new GameObject(100, 390, 50, 100, 0, dino);
 
 		t = new Timer(1000 / 60, this);
