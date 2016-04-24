@@ -1,3 +1,4 @@
+ 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,7 @@ import java.util.Random;
 
 import javax.swing.Timer;
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Animation extends JPanel implements ActionListener {
@@ -23,11 +25,18 @@ public class Animation extends JPanel implements ActionListener {
 	BufferedImage background1;
 	BufferedImage dino;
 	BufferedImage cactus;
+	JLabel score;
+	int score1;
+	boolean win = true;
 
 	ArrayList<GameObject> cactusList;
 	Timer t;
 
 	public Animation() {
+		score = new JLabel();
+		score.setBounds(500, 50, 100, 50);
+		add(score);
+
 		try {
 			background = ImageIO.read(this.getClass().getResourceAsStream("mirrorimage.png"));
 			background1 = ImageIO.read(this.getClass().getResourceAsStream("mirrorimage.png"));
@@ -59,7 +68,7 @@ public class Animation extends JPanel implements ActionListener {
 	int v = 0;
 	int p = 1999;
 
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {
 		g.drawImage(background, v = v - (s - 2), 0, 2000, 500, null);
 		g.drawImage(background1, p = p - (s - 2), 0, 2000, 500, null);
 		if (v <= -2000) {
@@ -79,6 +88,8 @@ public class Animation extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		dinosaur.Dinoupdate();
+		score1+=1;
+		score.setText(""+score1);
 		count++;
 		speedCount++;
 		for (int i = 0; i < cactusList.size(); i++) {
@@ -90,13 +101,14 @@ public class Animation extends JPanel implements ActionListener {
 			if (go.getX() > 100 && go.getX() < 150) {
 				if (dinosaur.getY() > 290) {
 					System.out.println("Game OVER");
-					System.exit(0);
+					//Where I should add Restart stuff...
+					win = false;
 					;
 				}
 			}
 		}
 		Random r = new Random();
-		x = r.nextInt(250) * 2;
+		x = r.nextInt(500);
 		if (count >= 100 + x) {
 			count = 0;
 			addCactus();
@@ -116,5 +128,11 @@ public class Animation extends JPanel implements ActionListener {
 
 		}
 	}
+	
+		public boolean WinStatus()
+		{
+			return win;
+		}
+	
 
 }
