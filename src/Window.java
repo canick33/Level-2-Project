@@ -37,8 +37,5 @@ public void keyReleased(KeyEvent e) {
 	// TODO Auto-generated method stub
 	
 }
-public void deleteWindow()
-{
-	frame.dispose();
-}
+
 }

@@ -26,6 +26,7 @@ public class GameObject implements KeyListener {
 		h = H;
 		speed = Speed;
 		image = Image;
+
 	}
 
 	public void paint(Graphics g) {
@@ -127,6 +128,11 @@ public class GameObject implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			System.out.println("test");
 		}
+	
+
+		
+	
+		
 	}
 
 	@Override

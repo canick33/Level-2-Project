@@ -1,3 +1,4 @@
+import javax.swing.JOptionPane;
 
 public class gameManager {
 	Animation a;
@@ -18,8 +19,9 @@ public class gameManager {
 			System.out.println("hi");
 			if(!a.WinStatus())
 			{
-				System.out.println("Do you wish to go again??");
+				
 				b = false;
+				a.setCurrentState(2);
 
 			}
 		}
