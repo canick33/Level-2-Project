@@ -1,5 +1,4 @@
- 
-import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,11 +7,10 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.Timer;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class Animation extends JPanel implements ActionListener {
 	private int x, y, w, h;
@@ -20,16 +18,16 @@ public class Animation extends JPanel implements ActionListener {
 	BufferedImage cactusImage;
 	int t1 = 300;
 	String time;
-	int menuState =0;
+	int menuState = 0;
 	int gameState = 1;
-	int endState =2;
+	int endState = 2;
 	int currentState = 0;
 	int s = 4;
 	int count = 0;
 	int speedCount = 0;
 	boolean Start = false;
 	String color;
-	BufferedImage background;	
+	BufferedImage background;
 	BufferedImage start;
 
 	BufferedImage gameOver;
@@ -53,10 +51,9 @@ public class Animation extends JPanel implements ActionListener {
 			background1 = ImageIO.read(this.getClass().getResourceAsStream("mirrorimage.png"));
 			dino = ImageIO.read(this.getClass().getResourceAsStream("dino.png"));
 			cactusImage = ImageIO.read(this.getClass().getResourceAsStream("cactus.png"));
-			gameOver =  ImageIO.read(this.getClass().getResourceAsStream("gameOver.png"));
-			start =  ImageIO.read(this.getClass().getResourceAsStream("start.jpg"));
+			gameOver = ImageIO.read(this.getClass().getResourceAsStream("gameOver.png"));
+			start = ImageIO.read(this.getClass().getResourceAsStream("start.jpg"));
 
-		
 		} catch (Exception e) {
 
 		}
@@ -72,14 +69,18 @@ public class Animation extends JPanel implements ActionListener {
 
 	}
 
-	public void setStart(boolean s)
-	{
+	public void setStart(boolean s) {
 		Start = s;
 	}
+
 	public void keyPressed(KeyEvent e) {
 
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			if (!dinosaur.getisJumping()) {
+				dinosaur.jump();
+			}
 			dinosaur.setisJumping(true);
+
 		}
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			Start = true;
@@ -90,26 +91,20 @@ public class Animation extends JPanel implements ActionListener {
 	int p = 1999;
 
 	public void paintComponent(Graphics g) {
-		if(currentState == menuState)
-		{
+		if (currentState == menuState) {
 			drawMenuState(g);
 		}
-		if(currentState ==gameState)
-		{
-			
-		DrawGameState(g);
+		if (currentState == gameState) {
+
+			DrawGameState(g);
 		}
-		if(!win)
-		{
+		if (!win) {
 			DrawEndState(g);
 		}
 	}
-	public void DrawGameState(Graphics g)
-	{
-	
-		
-			
-		
+
+	public void DrawGameState(Graphics g) {
+
 		g.drawImage(background, v = v - (s - 2), 0, 2000, 500, null);
 		g.drawImage(background1, p = p - (s - 2), 0, 2000, 500, null);
 		if (v <= -2000) {
@@ -122,41 +117,39 @@ public class Animation extends JPanel implements ActionListener {
 		for (int i = 0; i < cactusList.size(); i++) {
 			GameObject go = cactusList.get(i);
 			go.paint(g);
-		
+
+		}
+
 	}
-		
-	}
-	public void drawMenuState(Graphics g)
-	{
+
+	public void drawMenuState(Graphics g) {
 		time = ("PRESS ENTER TO BEGIN");
-		g.drawImage(start,0, 0, 1500, 500, null);
+		g.drawImage(start, 0, 0, 1500, 500, null);
 		g.drawString(time, 30, 10);
-		if(Start)
-		{
+		if (Start) {
 			currentState = gameState;
-			score1 =0;
+			score1 = 0;
 			s = 3;
 		}
 
+	}
+
+	public void DrawEndState(Graphics g) {
+		g.drawImage(gameOver, 0, 0, 1500, 500, null);
 
 	}
-	public void DrawEndState(Graphics g)
-	{
-		g.drawImage(gameOver,0, 0, 1500, 500, null);
 
-	}
-	public void setCurrentState(int x)
-	{
+	public void setCurrentState(int x) {
 		currentState = x;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		t1-=1;
+		t1 -= 1;
 		// TODO Auto-generated method stub
 		dinosaur.Dinoupdate();
-		score1+=1;
-		score.setText(""+score1);
+		score1 += 1;
+		score.setText("" + score1);
 		count++;
 		speedCount++;
 		for (int i = 0; i < cactusList.size(); i++) {
@@ -167,11 +160,10 @@ public class Animation extends JPanel implements ActionListener {
 
 			if (go.getX() > 100 && go.getX() < 150) {
 				if (dinosaur.getY() > 290) {
-					if( win)
-					{
-					System.out.println("Game OVER");
-					//Where I should add Restart stuff...
-					win = false;
+					if (win) {
+						System.out.println("Game OVER");
+						// Where I should add Restart stuff...
+						win = false;
 					}
 				}
 			}
@@ -191,14 +183,12 @@ public class Animation extends JPanel implements ActionListener {
 	}
 
 	private void addCactus() {
-		 cactusList.add(new GameObject(2000, 390, 25, 100, s,cactusImage ));
+		cactusList.add(new GameObject(2000, 390, 25, 100, s, cactusImage));
 
 	}
-	
-		public boolean WinStatus()
-		{
-			return win;
-		}
-	
+
+	public boolean WinStatus() {
+		return win;
+	}
 
 }

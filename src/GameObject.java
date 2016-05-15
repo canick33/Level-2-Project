@@ -1,10 +1,7 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-
-import javax.imageio.ImageIO;
 
 public class GameObject implements KeyListener {
 	boolean isJumping;
@@ -81,19 +78,16 @@ public class GameObject implements KeyListener {
 	}
 
 	public void Dinoupdate() {
-		if(hopCount==5)
-		{
-			y =y-5;
+		if (hopCount == 5) {
+			y = y - 5;
 		}
-		if(hopCount>9)
-		{
-			y = y+5;
-			hopCount =0;
+		if (hopCount > 9) {
+			y = y + 5;
+			hopCount = 0;
 		}
-		if (isJumping)
-		{
-			if (isFalling)
-			{
+		if (isJumping) {
+
+			if (isFalling) {
 				y = y + 10;
 			} else {
 
@@ -109,11 +103,13 @@ public class GameObject implements KeyListener {
 				isJumping = false;
 				isFalling = false;
 			}
+		} else {
+			hopCount = hopCount + 1;
 		}
-		else
-		{
-			hopCount = hopCount+1;
-		}
+	}
+
+	void jump() {
+		new Thread(new SoundPlayer("jump.wav")).start();
 	}
 
 	@Override
@@ -128,11 +124,7 @@ public class GameObject implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			System.out.println("test");
 		}
-	
 
-		
-	
-		
 	}
 
 	@Override
