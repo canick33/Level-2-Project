@@ -19,6 +19,7 @@ public Window()
 	frame.setVisible(true);
 	frame.add(a);
   	frame.addKeyListener(this);
+  	frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 	frame.setSize(1500, 500);
 	
 }

@@ -21,6 +21,7 @@ public class Animation extends JPanel implements ActionListener {
 	int menuState = 0;
 	int gameState = 1;
 	int endState = 2;
+	int gameOverScreen = 0;
 	int currentState = 0;
 	int s = 4;
 	int count = 0;
@@ -51,7 +52,7 @@ public class Animation extends JPanel implements ActionListener {
 			background1 = ImageIO.read(this.getClass().getResourceAsStream("mirrorimage.png"));
 			dino = ImageIO.read(this.getClass().getResourceAsStream("dino.png"));
 			cactusImage = ImageIO.read(this.getClass().getResourceAsStream("cactus.png"));
-			gameOver = ImageIO.read(this.getClass().getResourceAsStream("gameOver.png"));
+			gameOver = ImageIO.read(this.getClass().getResourceAsStream("images.png"));
 			start = ImageIO.read(this.getClass().getResourceAsStream("start.jpg"));
 
 		} catch (Exception e) {
@@ -62,7 +63,7 @@ public class Animation extends JPanel implements ActionListener {
 		y = 390;
 		w = 25;
 		h = 100;
-		dinosaur = new GameObject(100, 390, 50, 100, 0, dino);
+		dinosaur = new GameObject(250, 390, 50, 100, 0, dino);
 
 		t = new Timer(1000 / 60, this);
 		t.start();
@@ -85,6 +86,15 @@ public class Animation extends JPanel implements ActionListener {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			Start = true;
 		}
+		if(e.getKeyCode() == KeyEvent.VK_R)
+		{
+			Start = false;
+			win = true;
+			currentState = menuState;
+			cactusList.clear();
+			gameOverScreen = 0;
+			repaint();
+		}
 	}
 
 	int v = 0;
@@ -95,10 +105,10 @@ public class Animation extends JPanel implements ActionListener {
 			drawMenuState(g);
 		}
 		if (currentState == gameState) {
-
 			DrawGameState(g);
 		}
 		if (!win) {
+			gameOverScreen = 2;
 			DrawEndState(g);
 		}
 	}
@@ -136,6 +146,9 @@ public class Animation extends JPanel implements ActionListener {
 
 	public void DrawEndState(Graphics g) {
 		g.drawImage(gameOver, 0, 0, 1500, 500, null);
+		time= ("press R to Restart");
+		g.drawString(time, 30, 10);
+
 
 	}
 
@@ -145,11 +158,15 @@ public class Animation extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
 		t1 -= 1;
 		// TODO Auto-generated method stub
 		dinosaur.Dinoupdate();
+		if (gameOverScreen !=2)
+		{
 		score1 += 1;
-		score.setText("" + score1);
+		}
+		score.setText("SCORE: " + score1);
 		count++;
 		speedCount++;
 		for (int i = 0; i < cactusList.size(); i++) {
@@ -158,7 +175,7 @@ public class Animation extends JPanel implements ActionListener {
 		}
 		for (GameObject go : cactusList) {
 
-			if (go.getX() > 100 && go.getX() < 150) {
+			if (go.getX() > 225 && go.getX() < 275) {
 				if (dinosaur.getY() > 290) {
 					if (win) {
 						System.out.println("Game OVER");
