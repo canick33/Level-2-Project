@@ -59,10 +59,6 @@ public class Animation extends JPanel implements ActionListener {
 
 		}
 		cactusList = new ArrayList<GameObject>();
-		x = 1000;
-		y = 390;
-		w = 25;
-		h = 100;
 		dinosaur = new GameObject(250, 390, 50, 100, 0, dino);
 
 		t = new Timer(1000 / 60, this);
@@ -79,8 +75,9 @@ public class Animation extends JPanel implements ActionListener {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			if (!dinosaur.getisJumping()) {
 				dinosaur.jump();
+				dinosaur.setisJumping(true);
+
 			}
-			dinosaur.setisJumping(true);
 
 		}
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -200,7 +197,7 @@ public class Animation extends JPanel implements ActionListener {
 	}
 
 	private void addCactus() {
-		cactusList.add(new GameObject(2000, 390, 25, 100, s, cactusImage));
+		cactusList.add(new GameObject(2000, 390, 50, 100, s, cactusImage));
 
 	}
 

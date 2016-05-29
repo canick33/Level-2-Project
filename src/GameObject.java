@@ -12,9 +12,10 @@ public class GameObject implements KeyListener {
 	private int x, y, w, h;
 	BufferedImage image;
 	int hopCount;
-	int hopSpeed = 5;
-	int jumpSpeed = 10;
+	int hopSpeed = 2;
+	int jumpSpeed = 16;
 	SoundPlayer sound;
+	int jumpcount = 0;
 
 	public static void main(String[] args) {
 	}
@@ -82,37 +83,36 @@ public class GameObject implements KeyListener {
 	}
 
 	public void Dinoupdate() {
-
-		if (isJumping) {
-
-			if (isFalling) {
-				y = y + jumpSpeed;
-			} else {
-
-				if (y > 150) {
-					y = y - jumpSpeed;
-				} else {
-					isFalling = true;
-				
-				}
-
+		
+		count++;
+		if(isJumping)
+		{
+			if (count%2 ==0)
+			{
+	
+					jumpSpeed--;
 			}
-			if (y >= 390) {
+				y = y-jumpSpeed;
+						
+			if(y >390)
+			{
 				isJumping = false;
-				isFalling = false;
+				jumpSpeed = 16;
+				y = 390;
 			}
-		} else {
-			if (hopCount == 5) {
-				y = y - hopSpeed;
 			}
-			if (hopCount > 9) {
-				y = y + hopSpeed;
-				hopCount = 0;
+			if(!isJumping)
+			{
+				if(count%5 ==0)
+				{
+					hopSpeed*=-1;
+				}
+				y-=hopSpeed;
 			}
-			hopCount = hopCount + 1;
-		}
 	}
-
+	
+		
+	
 	void jump() {
 		
 		new Thread(sound).start();
